@@ -21,3 +21,10 @@ export function editCategory(id, newName){
         name: newName
     };
 }
+
+export function startEditCategory(id){
+    return {
+        type: ActionTypes.START_EDIT_CATEGORY,
+        id: id
+    };
+}
