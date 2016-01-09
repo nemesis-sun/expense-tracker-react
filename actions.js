@@ -28,3 +28,12 @@ export function startEditCategory(id){
         id: id
     };
 }
+
+export function addItem(name, price, categoryId){
+    return {
+        type: ActionTypes.ADD_ITEM,
+        name: name,
+        price: price,
+        category: categoryId
+    };
+}

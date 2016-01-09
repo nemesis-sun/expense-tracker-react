@@ -1,0 +1,6 @@
+#expense-tracker{
+    width: 600px;
+}
+.item-table {
+    table-layout: fixed;
+}
