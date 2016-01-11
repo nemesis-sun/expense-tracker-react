@@ -37,3 +37,34 @@ export function addItem(name, price, categoryId){
         category: categoryId
     };
 }
+
+export function removeItem(id){
+    return {
+        type: ActionTypes.REMOVE_ITEM,
+        id: id
+    };
+}
+
+export function editItem(id, name, price, categoryId){
+    return {
+        type: ActionTypes.EDIT_ITEM,
+        id: id,
+        name: name,
+        price: price,
+        category: categoryId
+    };
+}
+
+export function startEditItem(id){
+    return {
+        type: ActionTypes.START_EDIT_ITEM,
+        id: id
+    };
+}
+
+export function filterCategory(id){
+    return {
+        type: ActionTypes.FILTER_CATEGORY,
+        id: id
+    };
+}

@@ -4,3 +4,11 @@
 .item-table {
     table-layout: fixed;
 }
+.fa {
+    cursor: pointer;
+}
+
+#category-filter {
+    float: right;
+    padding-bottom: 10px;
+}
