@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "rc-calendar": "^5.2.1",
     "react": "^0.14.1",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.0",

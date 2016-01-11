@@ -1,5 +1,11 @@
 import React from 'react'
+import Calendar from 'rc-calendar'
+import DatePicker from 'rc-calendar/lib/Picker'
+import CalendarLocale from 'rc-calendar/lib/locale/en_US'
+import GregorianCalendar from 'gregorian-calendar'
+import DateTimeFormat from 'gregorian-calendar-format'
 
+const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
 
 class CategoryAddForm extends React.Component {
     constructor(props){
@@ -111,7 +117,7 @@ class Category extends React.Component {
 class ItemForm extends React.Component {
     constructor(props){
         super(props);
-        this.state = {selectedCategory: "", name: null, price: null};
+        this.state = {selectedCategory: "", name: null, price: null, time: null};
     }
 
     componentWillReceiveProps(nextProps){
@@ -132,6 +138,10 @@ class ItemForm extends React.Component {
         let categoryOptions = categories.map(category => (
             <option key={category.id} value={category.id}>{category.name}</option>
         ));
+        const calendar = (<Calendar locale={CalendarLocale}
+                            style={{zIndex: 1000}}
+                            disabledTime={false}
+                            showDateInput={false}/>)
         return (
             <div className="form-horizontal form-group-sm">
                 <div className="form-group">
@@ -144,6 +154,20 @@ class ItemForm extends React.Component {
                     <label className="col-sm-3 control-label">Price</label>
                     <div className="col-sm-9">
                         <input value={this.state.price} type="text" className="form-control" placeholder="Item Price" onChange={this.handlePriceChange.bind(this)}/>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label className="col-sm-3 control-label">Time</label>
+                    <div className="col-sm-9">
+                        <DatePicker animation='slide-down' calendar={calendar} onChange={this.handleDateChange.bind(this)}>{
+                            ({value}) => {
+                                if(this.state.time===null)
+                                    value=null;
+                                return (<input className="form-control input-sm"
+                                    value={value && dateFormatter.format(value)}
+                                    placeholder="Buy Date"></input>);
+                            }
+                        }</DatePicker>
                     </div>
                 </div>
                 <div className="form-group">
@@ -187,7 +211,8 @@ class ItemForm extends React.Component {
         this.setState({
             selectedCategory: "",
             name: null,
-            price: null
+            price: null,
+            time: null
         });
     }
 
@@ -201,6 +226,17 @@ class ItemForm extends React.Component {
 
     handlePriceChange(e){
         this.setState({price: e.target.value});
+    }
+
+    handleDateChange(value){
+        value = value.clone();
+        console.log(value.getHourOfDay());
+        value.setHourOfDay(0+value.getTimezoneOffset()/60);
+        value.setMinutes(0);
+        value.setSeconds(0);
+        value.setMilliseconds(0);
+        console.log(value.getTime());
+        this.setState({time: value.getTime()});
     }
 }
 

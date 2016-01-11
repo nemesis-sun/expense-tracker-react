@@ -7,6 +7,7 @@ import * as reducers from './reducers'
 import {createStore, combineReducers} from 'redux'
 import {connect, Provider} from 'react-redux'
 import './style.css'
+import './node_modules/rc-calendar/assets/index.css';
 
 const initialState = {
     categories: [],
