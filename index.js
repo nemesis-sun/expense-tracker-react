@@ -38,10 +38,10 @@ function mapDispatchToProps(dispatch){
         onRemoveCategory: (id) => {dispatch(actions.removeCategory(id));},
         onEditCategory: (id, name) => {dispatch(actions.editCategory(id, name));},
         onEditCategoryStart: (id) => {dispatch(actions.startEditCategory(id));},
-        onAddItem: (name, price, categoryId) => {dispatch(actions.addItem(name, price, categoryId));},
+        onAddItem: (name, price, time, categoryId) => {dispatch(actions.addItem(name, price, time, categoryId));},
         onRemoveItem: (id) => {dispatch(actions.removeItem(id));},
         onEditItemStart: (id) => {dispatch(actions.startEditItem(id));},
-        onEditItem: (id, name, price, categoryId) => {dispatch(actions.editItem(id, name, price, categoryId));},
+        onEditItem: (id, name, price, time, categoryId) => {dispatch(actions.editItem(id, name, price, time, categoryId));},
         onCategoryFilterChange: (id) => {dispatch(actions.filterCategory(id));},
     };
 }

@@ -55,11 +55,11 @@ function editCategory(categories, id, newName){
 export function items(state=[], action){
     switch(action.type){
         case ActionTypes.ADD_ITEM:
-            return addItem(state, action.name, action.price, action.category);
+            return addItem(state, action.name, action.price, action.time, action.category);
         case ActionTypes.REMOVE_ITEM:
             return removeItem(state, action.id);
         case ActionTypes.EDIT_ITEM:
-            return editItem(state, action.id, action.name, action.price, action.category);
+            return editItem(state, action.id, action.name, action.price, action.time, action.category);
         case ActionTypes.REMOVE_CATEGORY:
             return state.filter(item => (item.category!==action.id));
         default:
@@ -78,11 +78,12 @@ export function itemForm(state={editing: false, editId: null}, action){
     }
 }
 
-function addItem(items, name, price, category) {
+function addItem(items, name, price, time, category) {
     return items.concat([{
         id: Date.now().toString(),
         name: name,
         price: price,
+        time: time,
         category: category
     }]);
 }
@@ -91,12 +92,13 @@ function removeItem(items, id){
     return items.filter(item => item.id!==id);
 }
 
-function editItem(items, id, name, price, category){
+function editItem(items, id, name, price, time, category){
     const editIndex = items.findIndex(item => item.id===id);
     if(editIndex > -1){
         items[editIndex].name = name;
         items[editIndex].price = price;
         items[editIndex].category = category;
+        items[editIndex].time = time;
         return items.concat([]);
     }
     return items;

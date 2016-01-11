@@ -29,11 +29,12 @@ export function startEditCategory(id){
     };
 }
 
-export function addItem(name, price, categoryId){
+export function addItem(name, price, time, categoryId){
     return {
         type: ActionTypes.ADD_ITEM,
         name: name,
         price: price,
+        time: time,
         category: categoryId
     };
 }
@@ -45,12 +46,13 @@ export function removeItem(id){
     };
 }
 
-export function editItem(id, name, price, categoryId){
+export function editItem(id, name, price, time, categoryId){
     return {
         type: ActionTypes.EDIT_ITEM,
         id: id,
         name: name,
         price: price,
+        time: time,
         category: categoryId
     };
 }

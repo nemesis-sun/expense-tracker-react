@@ -127,7 +127,8 @@ class ItemForm extends React.Component {
                 this.setState({
                     name: editItem[0].name,
                     price: editItem[0].price,
-                    selectedCategory: editItem[0].category
+                    selectedCategory: editItem[0].category,
+                    time: editItem[0].time
                 });
             }
         }
@@ -161,8 +162,14 @@ class ItemForm extends React.Component {
                     <div className="col-sm-9">
                         <DatePicker animation='slide-down' calendar={calendar} onChange={this.handleDateChange.bind(this)}>{
                             ({value}) => {
-                                if(this.state.time===null)
-                                    value=null;
+                                if(this.state.time!==null){
+                                    value = new GregorianCalendar(CalendarLocale);
+                                    value.setTimezoneOffset(0);
+                                    console.log("time : %s", this.state.time);
+                                    value.setTime(this.state.time);
+                                } else {
+                                    value = null;
+                                }
                                 return (<input className="form-control input-sm"
                                     value={value && dateFormatter.format(value)}
                                     placeholder="Buy Date"></input>);
@@ -198,9 +205,9 @@ class ItemForm extends React.Component {
         }
 
         if(this.props.editing===true)
-            onEditItem(this.props.editId, this.state.name, price, this.state.selectedCategory);
+            onEditItem(this.props.editId, this.state.name, price, this.state.time, this.state.selectedCategory);
         else
-            onAddItem(this.state.name, price, this.state.selectedCategory);
+            onAddItem(this.state.name, price, this.state.time, this.state.selectedCategory);
 
         this.resetForm();
         //console.log(this.state);
@@ -230,7 +237,6 @@ class ItemForm extends React.Component {
 
     handleDateChange(value){
         value = value.clone();
-        console.log(value.getHourOfDay());
         value.setHourOfDay(0+value.getTimezoneOffset()/60);
         value.setMinutes(0);
         value.setSeconds(0);
